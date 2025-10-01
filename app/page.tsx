@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar"
 import Hero from "@/components/Hero"
 import AboutSection from "@/components/AboutSection"
 import ServicesSection from "@/components/ServicesSection"
-import PortfolioSection from "@/components/PortfolioSection"
+import ProjectsSection from "@/components/ProjectsSection"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import ContactSection from "@/components/ContactSection"
 import Footer from "@/components/Footer"
@@ -22,7 +22,7 @@ export default function KarekaduBuilders() {
 
   <AboutSection />
   <ServicesSection />
-  <PortfolioSection />
+  <ProjectsSection />
   <TestimonialsSection />
   <ContactSection />
   <Footer />

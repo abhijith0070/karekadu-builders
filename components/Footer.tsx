@@ -27,7 +27,7 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-primary-foreground/80">
               <li>About Us</li>
-              <li>Our Portfolio</li>
+              <li>Our Projects</li>
               <li>Testimonials</li>
               <li>Careers</li>
             </ul>

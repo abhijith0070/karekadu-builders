@@ -1,11 +1,43 @@
+"use client"
+
+import { useState } from "react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import ProjectModal from "@/components/ProjectModal"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Calendar, MapPin, Users, Clock, CheckCircle } from "lucide-react"
 
+type Project = {
+  id: number
+  title: string
+  description: string
+  image: string
+  location: string
+  progress?: number
+  timeLeft?: string
+  units: string
+  startDate?: string
+  estimated?: string
+  completed?: string
+  awards?: string
+}
+
 export default function ProjectsPage() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openModal = (project: Project) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedProject(null)
+  }
+
   const ongoingProjects = [
     {
       id: 1,
@@ -120,8 +152,64 @@ export default function ProjectsPage() {
           </div>
         </section>
 
+        {/* Completed Projects */}
+        <section id="completed" className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <Badge className="mb-4 bg-green-100 text-green-800">Completed Projects</Badge>
+              <h2 className="text-4xl font-bold text-foreground mb-4">Successfully Delivered</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Our proudest achievements - completed projects that showcase our expertise and commitment to excellence.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {completedProjects.map((project) => (
+                <Card 
+                  key={project.id} 
+                  className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+                  onClick={() => openModal(project)}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <Badge className="bg-green-500 text-white">Completed {project.completed}</Badge>
+                    </div>
+                    <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                      <Button variant="secondary" size="sm" className="transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                        View Details
+                      </Button>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4" />
+                        <span>Delivered {project.completed}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4" />
+                        <span>{project.units}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-green-600">
+                      <CheckCircle className="h-4 w-4" />
+                      <span>{project.awards}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Ongoing Projects */}
-        <section id="ongoing" className="py-20 bg-background">
+        <section id="ongoing" className="py-20 bg-muted">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <Badge className="mb-4 bg-orange-100 text-orange-800">Ongoing Projects</Badge>
@@ -132,7 +220,11 @@ export default function ProjectsPage() {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {ongoingProjects.map((project) => (
-                <Card key={project.id} className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                <Card 
+                  key={project.id} 
+                  className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+                  onClick={() => openModal(project)}
+                >
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
@@ -193,7 +285,11 @@ export default function ProjectsPage() {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {upcomingProjects.map((project) => (
-                <Card key={project.id} className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                <Card 
+                  key={project.id} 
+                  className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+                  onClick={() => openModal(project)}
+                >
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
@@ -230,60 +326,15 @@ export default function ProjectsPage() {
             </div>
           </div>
         </section>
-
-        {/* Completed Projects */}
-        <section id="completed" className="py-20 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <Badge className="mb-4 bg-green-100 text-green-800">Completed Projects</Badge>
-              <h2 className="text-4xl font-bold text-foreground mb-4">Successfully Delivered</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Our proudest achievements - completed projects that showcase our expertise and commitment to excellence.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {completedProjects.map((project) => (
-                <Card key={project.id} className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-green-500 text-white">Completed {project.completed}</Badge>
-                    </div>
-                    <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                      <Button variant="secondary" size="sm" className="transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                        View Details
-                      </Button>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        <span>Delivered {project.completed}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="h-4 w-4" />
-                        <span>{project.units}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-green-600">
-                      <CheckCircle className="h-4 w-4" />
-                      <span>{project.awards}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
       </div>
       <Footer />
+      
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   )
 }

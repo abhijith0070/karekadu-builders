@@ -1,22 +1,52 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, Users } from "lucide-react";
+import ProjectModal from "@/components/ProjectModal";
+
+type Project = {
+  id: number
+  title: string
+  description: string
+  image: string
+  location: string
+  progress?: number
+  timeLeft?: string
+  units: string
+  startDate?: string
+  estimated?: string
+  completed?: string
+  awards?: string
+}
 
 export default function ProjectsSection() {
-  const featuredProjects = [
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openModal = (project: Project) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedProject(null)
+  }
+
+  const featuredProjects: Project[] = [
     { 
       id: 1, 
       title: "Grand Plaza Complex", 
       image: "/professional-construction-team-at-modern-building-.jpg",
       description: "Mixed-use development with retail, office, and residential spaces in the heart of the city.",
       location: "City Center",
-      status: "Completed 2024",
+      completed: "2024",
       units: "500+ Units",
-      category: "Mixed Use"
+      awards: "Excellence in Design"
     },
     { 
       id: 2, 
@@ -24,9 +54,9 @@ export default function ProjectsSection() {
       image: "/modern-construction-site-with-high-rise-buildings.jpg",
       description: "40-story luxury residential tower with premium amenities and smart home technology.",
       location: "Downtown District",
-      status: "Starting Q1 2025",
+      startDate: "Q1 2025",
       units: "200 Units",
-      category: "Residential"
+      estimated: "2027"
     },
     { 
       id: 3, 
@@ -34,9 +64,9 @@ export default function ProjectsSection() {
       image: "/shopping-mall-retail-complex-modern-architecture.jpg",
       description: "State-of-the-art technology center fostering startup culture and innovation.",
       location: "Innovation District",
-      status: "Completed 2023",
+      completed: "2023",
       units: "100+ Startups",
-      category: "Commercial"
+      awards: "Green Building Award"
     }
   ];
 
@@ -54,7 +84,11 @@ export default function ProjectsSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {featuredProjects.map((project) => (
-            <Card key={project.id} className="group overflow-hidden border-0 bg-card hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-3">
+            <Card 
+              key={project.id} 
+              className="group overflow-hidden border-0 bg-card hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-3 cursor-pointer"
+              onClick={() => openModal(project)}
+            >
               <div className="relative overflow-hidden">
                 <img
                   src={project.image}
@@ -63,15 +97,16 @@ export default function ProjectsSection() {
                 />
                 <div className="absolute top-4 left-4">
                   <Badge className={`${
-                    project.status.includes('Completed') ? 'bg-green-500' : 
-                    project.status.includes('Starting') ? 'bg-blue-500' : 'bg-orange-500'
+                    project.completed ? 'bg-green-500' : 
+                    project.startDate ? 'bg-blue-500' : 'bg-orange-500'
                   } text-white`}>
-                    {project.status}
+                    {project.completed ? `Completed ${project.completed}` : 
+                     project.startDate ? `Starting ${project.startDate}` : 'In Progress'}
                   </Badge>
                 </div>
                 <div className="absolute top-4 right-4">
                   <Badge variant="secondary" className="bg-white/90 text-primary">
-                    {project.category}
+                    {project.completed ? 'Delivered' : project.startDate ? 'Upcoming' : 'Ongoing'}
                   </Badge>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -96,7 +131,11 @@ export default function ProjectsSection() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
-                    <span>{project.status.replace('Starting ', '').replace('Completed ', '')}</span>
+                    <span>
+                      {project.completed ? project.completed : 
+                       project.startDate ? project.startDate : 
+                       project.estimated ? project.estimated : 'In Progress'}
+                    </span>
                   </div>
                 </div>
               </CardContent>
@@ -112,6 +151,13 @@ export default function ProjectsSection() {
           </Link>
         </div>
       </div>
+      
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </section>
   );
 }

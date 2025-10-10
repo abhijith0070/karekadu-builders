@@ -11,6 +11,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import Faqs2 from "@/components/FaqSection"
+import WorkSection from "@/components/WorkSection"
 import { Building2, Home, Building, Wrench, MapPin, Phone, Mail, Star, Users, Award, Clock } from "lucide-react"
 
 export default function KarekaduBuilders() {
@@ -22,8 +24,10 @@ export default function KarekaduBuilders() {
 
   <AboutSection />
   <ServicesSection />
+  <WorkSection />
   <ProjectsSection />
   <TestimonialsSection />
+  <Faqs2 />
   <ContactSection />
   <Footer />
     </div>

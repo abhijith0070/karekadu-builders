@@ -1,163 +1,340 @@
-"use client";
+'use client';
+import { motion, AnimatePresence, MotionConfig, Transition } from 'motion/react';
+import { Plus, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import TextAnimation from './uilayouts/scroll-text';
 
-import { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, Users } from "lucide-react";
-import ProjectModal from "@/components/ProjectModal";
-
-type Project = {
-  id: number
-  title: string
-  description: string
-  image: string
-  location: string
-  progress?: number
-  timeLeft?: string
-  units: string
-  startDate?: string
-  estimated?: string
-  completed?: string
-  awards?: string
+// Updated Card item type with multiple images
+interface CardItem {
+  id: number;
+  images: string[];
+  title: string;
+  description: string;
+  tags: string[];
 }
 
-export default function ProjectsSection() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+// Animation config
+const transition: Transition = {
+  type: 'spring',
+  bounce: 0.05,
+  duration: 0.3
+};
 
-  const openModal = (project: Project) => {
-    setSelectedProject(project)
-    setIsModalOpen(true)
-  }
+const LinearCardDialog: React.FC = () => {
+  const [index, setIndex] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [carouselWidth, setCarouselWidth] = useState<number>(0);
+  const carousel = useRef<HTMLDivElement>(null);
 
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setSelectedProject(null)
-  }
-
-  const featuredProjects: Project[] = [
-    { 
-      id: 1, 
-      title: "Grand Plaza Complex", 
-      image: "/professional-construction-team-at-modern-building-.jpg",
-      description: "Mixed-use development with retail, office, and residential spaces in the heart of the city.",
-      location: "City Center",
-      completed: "2024",
-      units: "500+ Units",
-      awards: "Excellence in Design"
+  // Updated items with multiple images
+  const items: CardItem[] = [
+    {
+      id: 1,
+      images: [
+        'https://images.unsplash.com/photo-1757672242146-a6a7897bcc80?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1170&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1170&auto=format&fit=crop'
+      ],
+      title: 'Accordion',
+      description: 'Immerse yourself in our cutting-edge interactive gallery. Experience the power of modern web design with smooth animations and intuitive interactions.',
+      tags: ['Sunrise', 'Mountains', 'Golden', 'Scenic', 'Inspiring'],
     },
-    { 
-      id: 2, 
-      title: "Skyline Residential Tower", 
-      image: "/modern-construction-site-with-high-rise-buildings.jpg",
-      description: "40-story luxury residential tower with premium amenities and smart home technology.",
-      location: "Downtown District",
-      startDate: "Q1 2025",
-      units: "200 Units",
-      estimated: "2027"
+    {
+      id: 2,
+      images: [
+        'https://images.unsplash.com/photo-1756806983725-977bb2308d4e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1170&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1170&auto=format&fit=crop'
+      ],
+      title: 'Globe Section',
+      description: 'Embark on a virtual journey around the world with our state-of-the-art 3D globe feature.',
+      tags: ['Misty', 'Path', 'Mysterious', 'Serene', 'Rugged'],
     },
-    { 
-      id: 3, 
-      title: "Innovation Hub", 
-      image: "/shopping-mall-retail-complex-modern-architecture.jpg",
-      description: "State-of-the-art technology center fostering startup culture and innovation.",
-      location: "Innovation District",
-      completed: "2023",
-      units: "100+ Startups",
-      awards: "Green Building Award"
-    }
+    {
+      id: 3,
+      images: [
+        'https://images.unsplash.com/photo-1756806983832-1f056cf24182?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1170&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=1170&auto=format&fit=crop'
+      ],
+      title: 'Image Mouse Trail',
+      description: 'Transform your browsing experience with our mesmerizing Image Mouse Trail feature.',
+      tags: ['Pathway', 'Adventure', 'Peaks', 'Challenging', 'Breathtaking'],
+    },
   ];
 
-  return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Our Projects
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-            Discover some of our signature developments shaping skylines and communities.
-          </p>
-        </div>
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {featuredProjects.map((project) => (
-            <Card 
-              key={project.id} 
-              className="group overflow-hidden border-0 bg-card hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-3 cursor-pointer"
-              onClick={() => openModal(project)}
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4">
-                  <Badge className={`${
-                    project.completed ? 'bg-green-500' : 
-                    project.startDate ? 'bg-blue-500' : 'bg-orange-500'
-                  } text-white`}>
-                    {project.completed ? `Completed ${project.completed}` : 
-                     project.startDate ? `Starting ${project.startDate}` : 'In Progress'}
-                  </Badge>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <Badge variant="secondary" className="bg-white/90 text-primary">
-                    {project.completed ? 'Delivered' : project.startDate ? 'Upcoming' : 'Ongoing'}
-                  </Badge>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="flex items-center gap-2 text-sm">
-                    <MapPin className="h-4 w-4" />
-                    <span>{project.location}</span>
+    const handleKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape' && isOpen) {
+        handleCloseDialog();
+      }
+      if (isOpen && currentItem) {
+        if (event.key === 'ArrowRight') {
+          handleNextImage();
+        } else if (event.key === 'ArrowLeft') {
+          handlePrevImage();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isOpen, currentImageIndex]);
+
+  useEffect(() => {
+    if (carousel.current) {
+      const scrollWidth = carousel.current.scrollWidth;
+      const offsetWidth = carousel.current.offsetWidth;
+      setCarouselWidth(scrollWidth - offsetWidth);
+    }
+  }, [items]);
+
+  const handleCardClick = (itemIndex: number): void => {
+    setIndex(itemIndex);
+    setCurrentImageIndex(0);
+    setIsOpen(true);
+  };
+
+  const handleCloseDialog = (): void => {
+    setIsOpen(false);
+    setCurrentImageIndex(0);
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>): void => {
+    if (e.target === e.currentTarget) {
+      handleCloseDialog();
+    }
+  };
+
+  const handleNextImage = (): void => {
+    if (currentItem && currentImageIndex < currentItem.images.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    }
+  };
+
+  const handlePrevImage = (): void => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
+    }
+  };
+
+  const currentItem = items[index];
+
+  return (
+    <div className="relative min-h-screen w-full flex flex-col">
+      {/* Centered heading section */}
+      <div className="flex-shrink-0 flex items-center justify-center py-12 md:py-16">
+        <TextAnimation
+          text='Our Works'
+          variants={{
+            hidden: { filter: 'blur(10px)', opacity: 0, y: 20 },
+            visible: {
+              filter: 'blur(0px)',
+              opacity: 1,
+              y: 0,
+              transition: { ease: 'linear' },
+            },
+          }}
+          classname='xl:text-8xl text-7xl font-medium capitalize text-center'
+        />
+      </div>
+
+      {/* Centered carousel section */}
+      <div className="flex-1 flex items-center justify-center overflow-hidden">
+        <MotionConfig transition={transition}>
+          <motion.div
+            ref={carousel}
+            drag="x"
+            dragElastic={0.2}
+            dragConstraints={{ right: 0, left: -carouselWidth }}
+            dragTransition={{ bounceDamping: 30 }}
+            className="flex gap-3 md:gap-4 px-4"
+          >
+            {items.map((item, i) => (
+              <motion.div
+                key={item.id}
+                className="flex-shrink-0 flex relative flex-col overflow-hidden border dark:bg-black bg-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-950 cursor-pointer transition-colors"
+                layoutId={`dialog-${item.id}`}
+                style={{ 
+                  width: 'min(250px, 70vw)',
+                  borderRadius: '12px' 
+                }}
+                tabIndex={i}
+                onClick={() => handleCardClick(i)}
+                onKeyDown={(e: React.KeyboardEvent) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick(i);
+                  }
+                }}
+                role="button"
+                aria-label={`Open ${item.title} details`}
+              >
+                <motion.div layoutId={`dialog-img-${item.id}`}>
+                  <img
+                    src={item.images[0]}
+                    alt={item.title}
+                    className="w-full h-36 sm:h-48 object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
+                <div className="flex flex-grow flex-row items-end justify-between p-3 md:p-4">
+                  <div className="flex-1">
+                    <motion.h3
+                      layoutId={`dialog-title-${item.id}`}
+                      className="dark:text-white text-black font-semibold text-sm truncate"
+                    >
+                      {item.title}
+                    </motion.h3>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
+                      {item.images.length} {item.images.length === 1 ? 'image' : 'images'}
+                    </p>
                   </div>
+                  <button
+                    className="absolute bottom-2 right-2 p-1.5 md:p-2 dark:bg-neutral-800 bg-neutral-300 hover:bg-neutral-400 dark:hover:bg-neutral-700 rounded-xl transition-colors"
+                    aria-label={`Open ${item.title}`}
+                    tabIndex={-1}
+                  >
+                    <Plus className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </MotionConfig>
+      </div>
+
+      {/* Modal remains the same */}
+      {isOpen && currentItem && createPortal(
+        <AnimatePresence initial={false} mode="sync">
+          <motion.div
+            key={`backdrop-${currentItem.id}`}
+            className="fixed inset-0 h-full w-full dark:bg-black/50 bg-black/25 backdrop-blur-sm z-40"
+            variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            onClick={handleBackdropClick}
+          />
+          <motion.div
+            key="dialog"
+            className="pointer-events-none fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4 md:p-6"
+          >
+            <motion.div
+              className="pointer-events-auto relative flex flex-col dark:bg-neutral-900 bg-white border shadow-2xl w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-[500px] max-h-[85vh] sm:max-h-[90vh]"
+              layoutId={`dialog-${currentItem.id}`}
+              tabIndex={-1}
+              style={{ borderRadius: '16px' }}
+              role="dialog"
+              aria-labelledby={`dialog-title-${currentItem.id}`}
+              aria-describedby={`dialog-description-${currentItem.id}`}
+            >
+              <div className="overflow-y-auto flex-1">
+                <div className="relative">
+                  <motion.div layoutId={`dialog-img-${currentItem.id}`}>
+                    <img
+                      src={currentItem.images[currentImageIndex]}
+                      alt={`${currentItem.title} - Image ${currentImageIndex + 1}`}
+                      className="h-48 sm:h-56 md:h-64 w-full object-cover"
+                    />
+                  </motion.div>
+                  
+                  {currentItem.images.length > 1 && (
+                    <>
+                      <button
+                        onClick={handlePrevImage}
+                        disabled={currentImageIndex === 0}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-full transition-all"
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+                      <button
+                        onClick={handleNextImage}
+                        disabled={currentImageIndex === currentItem.images.length - 1}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-full transition-all"
+                        aria-label="Next image"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
+                      
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                        {currentItem.images.map((_, imgIndex) => (
+                          <button
+                            key={imgIndex}
+                            onClick={() => setCurrentImageIndex(imgIndex)}
+                            className={`w-2 h-2 rounded-full transition-all ${
+                              imgIndex === currentImageIndex
+                                ? 'bg-white'
+                                : 'bg-white/50 hover:bg-white/75'
+                            }`}
+                            aria-label={`Go to image ${imgIndex + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+                
+                <div className="p-4 sm:p-5 md:p-6">
+                  <motion.h2
+                    layoutId={`dialog-title-${currentItem.id}`}
+                    className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-zinc-50 mb-3 md:mb-4"
+                    id={`dialog-title-${currentItem.id}`}
+                  >
+                    {currentItem.title}
+                  </motion.h2>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed"
+                    id={`dialog-description-${currentItem.id}`}
+                  >
+                    {currentItem.description}
+                  </motion.div>
+                  {currentItem.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {currentItem.tags.map((tag, tagIndex) => (
+                        <span
+                          key={`${tag}-${tagIndex}`}
+                          className="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
-              <CardContent className="p-8">
-                <h3 className="font-bold text-2xl mb-3 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4" />
-                    <span>{project.units}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    <span>
-                      {project.completed ? project.completed : 
-                       project.startDate ? project.startDate : 
-                       project.estimated ? project.estimated : 'In Progress'}
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="text-center">
-          <Link href="/projects">
-            <Button size="lg" className="px-8 py-4 text-lg font-semibold hover:scale-105 transition-transform duration-300">
-              View All Projects
-            </Button>
-          </Link>
-        </div>
-      </div>
-      
-      {/* Project Modal */}
-      <ProjectModal 
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      />
-    </section>
+              
+              <button
+                onClick={handleCloseDialog}
+                className="absolute right-3 top-3 sm:right-4 sm:top-4 p-1.5 sm:p-2 bg-black dark:bg-white rounded-lg text-white dark:text-black border cursor-pointer transition-colors hover:opacity-80"
+                type="button"
+                aria-label={`Close ${currentItem.title} dialog`}
+              >
+                <X size={18} className="sm:w-5 sm:h-5" />
+              </button>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>,
+        document.body
+      )}
+    </div>
   );
-}
+};
+
+export default LinearCardDialog;

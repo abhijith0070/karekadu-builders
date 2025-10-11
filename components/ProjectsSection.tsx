@@ -1,5 +1,5 @@
 'use client';
-import { motion, AnimatePresence, MotionConfig, Transition } from 'motion/react';
+import { motion, AnimatePresence, MotionConfig, Transition, useDragControls, PanInfo } from 'motion/react';
 import { Plus, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -26,7 +26,13 @@ const LinearCardDialog: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [carouselWidth, setCarouselWidth] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isOverflowing, setIsOverflowing] = useState<boolean>(false);
+  
   const carousel = useRef<HTMLDivElement>(null);
+  const constraintsRef = useRef<HTMLDivElement>(null);
+  const dragControls = useDragControls();
+  const dragStartRef = useRef<{ x: number; y: number } | null>(null);
 
   // Updated items with multiple images
   const items: CardItem[] = [
@@ -67,9 +73,19 @@ const LinearCardDialog: React.FC = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.overflow = 'hidden';
+      document.body.style.width = '100%';
+      
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.overflow = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
     }
 
     const handleKeyDown = (event: KeyboardEvent): void => {
@@ -88,22 +104,35 @@ const LinearCardDialog: React.FC = () => {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.classList.remove('overflow-hidden');
     };
   }, [isOpen, currentImageIndex]);
 
+  // Updated useEffect to check for overflow
   useEffect(() => {
-    if (carousel.current) {
-      const scrollWidth = carousel.current.scrollWidth;
-      const offsetWidth = carousel.current.offsetWidth;
-      setCarouselWidth(scrollWidth - offsetWidth);
-    }
+    const checkOverflow = () => {
+      if (carousel.current && constraintsRef.current) {
+        const scrollWidth = carousel.current.scrollWidth;
+        const offsetWidth = constraintsRef.current.offsetWidth;
+        const newCarouselWidth = scrollWidth - offsetWidth;
+        
+        setCarouselWidth(newCarouselWidth);
+        setIsOverflowing(newCarouselWidth > 0);
+      }
+    };
+
+    checkOverflow();
+    
+    // Add resize listener to recheck overflow on window resize
+    window.addEventListener('resize', checkOverflow);
+    return () => window.removeEventListener('resize', checkOverflow);
   }, [items]);
 
   const handleCardClick = (itemIndex: number): void => {
-    setIndex(itemIndex);
-    setCurrentImageIndex(0);
-    setIsOpen(true);
+    if (!isDragging) {
+      setIndex(itemIndex);
+      setCurrentImageIndex(0);
+      setIsOpen(true);
+    }
   };
 
   const handleCloseDialog = (): void => {
@@ -129,12 +158,54 @@ const LinearCardDialog: React.FC = () => {
     }
   };
 
+  // Enhanced drag handling for all devices
+  const handleDragStart = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void => {
+    if (isOverflowing) {
+      setIsDragging(true);
+      dragStartRef.current = { x: info.point.x, y: info.point.y };
+    }
+  };
+
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void => {
+    if (isOverflowing) {
+      setTimeout(() => setIsDragging(false), 150);
+      dragStartRef.current = null;
+    }
+  };
+
+  // Touch event handlers to enable proper drag on mobile - only when overflowing
+  const handlePointerDown = (event: React.PointerEvent): void => {
+    if (isOverflowing) {
+      dragControls.start(event);
+    }
+  };
+
+  const handleTouchStart = (event: React.TouchEvent): void => {
+    if (isOverflowing) {
+      const touch = event.touches[0];
+      dragStartRef.current = { x: touch.clientX, y: touch.clientY };
+    }
+  };
+
+  const handleTouchMove = (event: React.TouchEvent): void => {
+    if (!isOverflowing || !dragStartRef.current) return;
+
+    const touch = event.touches[0];
+    const deltaX = Math.abs(touch.clientX - dragStartRef.current.x);
+    const deltaY = Math.abs(touch.clientY - dragStartRef.current.y);
+
+    // If horizontal movement is dominant, prevent scrolling
+    if (deltaX > deltaY && deltaX > 10) {
+      event.preventDefault();
+    }
+  };
+
   const currentItem = items[index];
 
   return (
     <div className="relative min-h-screen w-full flex flex-col">
-      {/* Centered heading section */}
-      <div className="flex-shrink-0 flex items-center justify-center py-12 md:py-16">
+      {/* Minimized heading section with much reduced spacing */}
+      <div className="flex-shrink-0 flex items-center justify-center pt-8 pb-6 sm:pt-10 sm:pb-8 md:pt-12 md:pb-10">
         <TextAnimation
           text='Our Works'
           variants={{
@@ -146,20 +217,41 @@ const LinearCardDialog: React.FC = () => {
               transition: { ease: 'linear' },
             },
           }}
-          classname='xl:text-8xl text-7xl font-medium capitalize text-center'
+          classname='text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-medium capitalize text-center'
         />
       </div>
 
-      {/* Centered carousel section */}
-      <div className="flex-1 flex items-center justify-center overflow-hidden">
+      {/* Centered carousel section with conditional centering */}
+      <div 
+        ref={constraintsRef}
+        className={`flex-1 flex items-center overflow-hidden ${
+          !isOverflowing ? 'justify-center' : 'justify-start'
+        }`}
+      >
         <MotionConfig transition={transition}>
           <motion.div
             ref={carousel}
-            drag="x"
-            dragElastic={0.2}
-            dragConstraints={{ right: 0, left: -carouselWidth }}
-            dragTransition={{ bounceDamping: 30 }}
+            drag={isOverflowing ? "x" : false}
+            dragControls={dragControls}
+            dragListener={isOverflowing}
+            dragElastic={isOverflowing ? 0.2 : 0}
+            dragConstraints={isOverflowing ? constraintsRef : undefined}
+            dragTransition={isOverflowing ? { bounceDamping: 30 } : undefined}
+            dragMomentum={isOverflowing}
+            onPointerDown={handlePointerDown}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
             className="flex gap-3 md:gap-4 px-4"
+            style={{ 
+              touchAction: isOverflowing ? 'pan-y' : 'auto',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              cursor: isOverflowing ? 'grab' : 'auto'
+            }}
+            // Reset position when not overflowing to ensure centering
+            animate={!isOverflowing ? { x: 0 } : undefined}
           >
             {items.map((item, i) => (
               <motion.div
@@ -168,10 +260,15 @@ const LinearCardDialog: React.FC = () => {
                 layoutId={`dialog-${item.id}`}
                 style={{ 
                   width: 'min(250px, 70vw)',
-                  borderRadius: '12px' 
+                  borderRadius: '12px'
                 }}
                 tabIndex={i}
                 onClick={() => handleCardClick(i)}
+                onPointerDown={(e) => {
+                  if (isOverflowing) {
+                    dragControls.start(e);
+                  }
+                }}
                 onKeyDown={(e: React.KeyboardEvent) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -185,8 +282,9 @@ const LinearCardDialog: React.FC = () => {
                   <img
                     src={item.images[0]}
                     alt={item.title}
-                    className="w-full h-36 sm:h-48 object-cover"
+                    className="w-full h-36 sm:h-48 object-cover pointer-events-none"
                     loading="lazy"
+                    draggable={false}
                   />
                 </motion.div>
                 <div className="flex flex-grow flex-row items-end justify-between p-3 md:p-4">
@@ -205,6 +303,7 @@ const LinearCardDialog: React.FC = () => {
                     className="absolute bottom-2 right-2 p-1.5 md:p-2 dark:bg-neutral-800 bg-neutral-300 hover:bg-neutral-400 dark:hover:bg-neutral-700 rounded-xl transition-colors"
                     aria-label={`Open ${item.title}`}
                     tabIndex={-1}
+                    onPointerDown={(e) => e.stopPropagation()}
                   >
                     <Plus className="w-3.5 h-3.5 md:w-4 md:h-4" />
                   </button>

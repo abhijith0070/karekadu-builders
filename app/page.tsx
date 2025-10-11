@@ -13,13 +13,15 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import Faqs2 from "@/components/FaqSection"
 import WorkSection from "@/components/WorkSection"
+import Navigationbar from "@/components/Navigation"
 import { Building2, Home, Building, Wrench, MapPin, Phone, Mail, Star, Users, Award, Clock } from "lucide-react"
 
 export default function KarekaduBuilders() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-    <Navbar />
+    {/* <Navbar /> */}
+    <Navigationbar />
     <Hero />
 
   <AboutSection />

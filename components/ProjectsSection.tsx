@@ -205,9 +205,9 @@ const LinearCardDialog: React.FC = () => {
   const currentItem = items[index];
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col">
-      {/* Minimized heading section with much reduced spacing */}
-      <div className="flex-shrink-0 flex items-center justify-center pt-8 pb-6 sm:pt-10 sm:pb-8 md:pt-12 md:pb-10">
+    <div className="relative w-full py-12 sm:py-16 md:py-20">
+      {/* Heading section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 md:mb-16">
         <TextAnimation
           text='Our Works'
           variants={{
@@ -219,101 +219,70 @@ const LinearCardDialog: React.FC = () => {
               transition: { ease: 'linear' },
             },
           }}
-          classname='text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-medium capitalize text-center'
+          classname='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium capitalize text-center'
         />
       </div>
 
-      {/* Centered carousel section with conditional centering */}
-      <div 
-        ref={constraintsRef}
-        className={`flex-1 flex items-center overflow-hidden ${
-          !isOverflowing ? 'justify-center' : 'justify-start'
-        }`}
-      >
-        <MotionConfig transition={transition}>
-          <motion.div
-            ref={carousel}
-            drag={isOverflowing ? "x" : false}
-            dragControls={dragControls}
-            dragListener={isOverflowing}
-            dragElastic={isOverflowing ? 0.2 : 0}
-            dragConstraints={isOverflowing ? constraintsRef : undefined}
-            dragTransition={isOverflowing ? { bounceDamping: 30 } : undefined}
-            dragMomentum={isOverflowing}
-            onPointerDown={handlePointerDown}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            className="flex gap-3 md:gap-4 px-4"
-            style={{ 
-              touchAction: isOverflowing ? 'pan-y' : 'auto',
-              userSelect: 'none',
-              WebkitUserSelect: 'none',
-              cursor: isOverflowing ? 'grab' : 'auto'
-            }}
-            // Reset position when not overflowing to ensure centering
-            animate={!isOverflowing ? { x: 0 } : undefined}
-          >
-            {items.map((item, i) => (
-              <motion.div
-                key={item.id}
-                className="flex-shrink-0 flex relative flex-col overflow-hidden border dark:bg-black bg-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-950 cursor-pointer transition-colors"
-                layoutId={`dialog-${item.id}`}
-                style={{ 
-                  width: 'min(250px, 70vw)',
-                  borderRadius: '12px'
-                }}
-                tabIndex={i}
-                onClick={() => handleCardClick(i)}
-                onPointerDown={(e) => {
-                  if (isOverflowing) {
-                    dragControls.start(e);
-                  }
-                }}
-                onKeyDown={(e: React.KeyboardEvent) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleCardClick(i);
-                  }
-                }}
-                role="button"
-                aria-label={`Open ${item.title} details`}
-              >
-                <motion.div layoutId={`dialog-img-${item.id}`}>
-                  <img
-                    src={item.images[0]}
-                    alt={item.title}
-                    className="w-full h-36 sm:h-48 object-cover pointer-events-none"
-                    loading="lazy"
-                    draggable={false}
-                  />
-                </motion.div>
-                <div className="flex flex-grow flex-row items-end justify-between p-3 md:p-4">
-                  <div className="flex-1">
-                    <motion.h3
-                      layoutId={`dialog-title-${item.id}`}
-                      className="dark:text-white text-black font-semibold text-sm truncate"
-                    >
-                      {item.title}
-                    </motion.h3>
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
-                      {item.images.length} {item.images.length === 1 ? 'image' : 'images'}
-                    </p>
-                  </div>
-                  <button
-                    className="absolute bottom-2 right-2 p-1.5 md:p-2 dark:bg-neutral-800 bg-neutral-300 hover:bg-neutral-400 dark:hover:bg-neutral-700 rounded-xl transition-colors"
-                    aria-label={`Open ${item.title}`}
-                    tabIndex={-1}
-                    onPointerDown={(e) => e.stopPropagation()}
-                  >
-                    <Plus className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  </button>
-                </div>
+      {/* Grid section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {items.map((item, i) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group relative flex flex-col overflow-hidden border dark:bg-black bg-white hover:bg-neutral-50 dark:hover:bg-neutral-950 cursor-pointer transition-all duration-300 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2"
+              layoutId={`dialog-${item.id}`}
+              tabIndex={i}
+              onClick={() => handleCardClick(i)}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleCardClick(i);
+                }
+              }}
+              role="button"
+              aria-label={`Open ${item.title} details`}
+            >
+              <motion.div layoutId={`dialog-img-${item.id}`} className="relative overflow-hidden">
+                <img
+                  src={item.images[0]}
+                  alt={item.title}
+                  className="w-full h-64 sm:h-72 md:h-80 object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  draggable={false}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </motion.div>
-            ))}
-          </motion.div>
-        </MotionConfig>
+              <div className="flex flex-grow flex-row items-end justify-between p-5 md:p-6">
+                <div className="flex-1">
+                  <motion.h3
+                    layoutId={`dialog-title-${item.id}`}
+                    className="dark:text-white text-black font-semibold text-lg md:text-xl mb-2 group-hover:text-blue-600 transition-colors duration-300"
+                  >
+                    {item.title}
+                  </motion.h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                    {item.images.length} {item.images.length === 1 ? 'image' : 'images'}
+                  </p>
+                </div>
+                <button
+                  className="absolute bottom-5 right-5 p-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg"
+                  aria-label={`Open ${item.title}`}
+                  tabIndex={-1}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCardClick(i);
+                  }}
+                >
+                  <Plus className="w-5 h-5" />
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* See All Button */}

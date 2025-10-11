@@ -6,9 +6,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navigationbar />
-      <div className="pt-16">
-        <AboutSection3 />
-      </div>
+      <AboutSection3 />
       <Footer />
     </div>
   )

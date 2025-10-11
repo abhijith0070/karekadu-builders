@@ -1,8 +1,9 @@
 'use client';
 import { motion, AnimatePresence, MotionConfig, Transition, useDragControls, PanInfo } from 'motion/react';
-import { Plus, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Plus, X, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useRouter } from 'next/navigation';
 import TextAnimation from './uilayouts/scroll-text';
 
 // Updated Card item type with multiple images
@@ -22,6 +23,7 @@ const transition: Transition = {
 };
 
 const LinearCardDialog: React.FC = () => {
+  const router = useRouter();
   const [index, setIndex] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
@@ -39,9 +41,9 @@ const LinearCardDialog: React.FC = () => {
     {
       id: 1,
       images: [
-        'https://images.unsplash.com/photo-1757672242146-a6a7897bcc80?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1170&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1170&auto=format&fit=crop'
+        '/c1.jpg',
+        '/c2.jpg',
+        '/c3.jpg'
       ],
       title: 'Accordion',
       description: 'Immerse yourself in our cutting-edge interactive gallery. Experience the power of modern web design with smooth animations and intuitive interactions.',
@@ -50,9 +52,9 @@ const LinearCardDialog: React.FC = () => {
     {
       id: 2,
       images: [
-        'https://images.unsplash.com/photo-1756806983725-977bb2308d4e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1170&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1170&auto=format&fit=crop'
+        '/c11.jpg',
+        '/c12.jpg',
+        '/c13.jpg'
       ],
       title: 'Globe Section',
       description: 'Embark on a virtual journey around the world with our state-of-the-art 3D globe feature.',
@@ -61,9 +63,9 @@ const LinearCardDialog: React.FC = () => {
     {
       id: 3,
       images: [
-        'https://images.unsplash.com/photo-1756806983832-1f056cf24182?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1170&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=1170&auto=format&fit=crop'
+        '/o11.jpg',
+        '/o12.jpg',
+        '/o13.jpg'
       ],
       title: 'Image Mouse Trail',
       description: 'Transform your browsing experience with our mesmerizing Image Mouse Trail feature.',
@@ -312,6 +314,17 @@ const LinearCardDialog: React.FC = () => {
             ))}
           </motion.div>
         </MotionConfig>
+      </div>
+
+      {/* See All Button */}
+      <div className="flex justify-center py-8 sm:py-10 md:py-12">
+        <button
+          onClick={() => router.push('/portfolio')}
+          className="group inline-flex items-center gap-2 px-8 py-3 bg-blue-100 dark:bg-blue-950 border-2 border-blue-500 rounded-full text-blue-600 dark:text-blue-400 font-semibold text-base sm:text-lg hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+        >
+          <span className="uppercase tracking-wide">VIEW ALL PROJECTS</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </button>
       </div>
 
       {/* Modal remains the same */}

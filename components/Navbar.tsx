@@ -21,11 +21,11 @@ export default function Navigation() {
             </h1>
           </div>
           <nav className="flex gap-4 font-medium">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Projects</a>
-            <a href="#">Contact</a>
+            <a href="/">Home</a>
+            <a href="/#about">About</a>
+            <a href="/#services">Services</a>
+            <a href="/portfolio">Projects</a>
+            <a href="/#contact">Contact</a>
           </nav>
           <button className="text-lg h-10 px-4 rounded-lg text-white flex items-center gap-2 bg-primary hover:bg-primary/90 transition-all">
             Get Quote
@@ -76,19 +76,19 @@ export default function Navigation() {
                   <div className="rounded-b-md py-4 px-3">
                     <ul className="space-y-2">
                       <li className="hover:bg-white/10 cursor-pointer p-2 px-3 rounded-md transition-colors">
-                        Home
+                        <a href="/" onClick={() => setIsOpen(false)}>Home</a>
                       </li>
                       <li className="hover:bg-white/10 cursor-pointer p-2 px-3 rounded-md transition-colors">
-                        About
+                        <a href="/#about" onClick={() => setIsOpen(false)}>About</a>
                       </li>
                       <li className="hover:bg-white/10 cursor-pointer p-2 px-3 rounded-md transition-colors">
-                        Services
+                        <a href="/#services" onClick={() => setIsOpen(false)}>Services</a>
                       </li>
                       <li className="hover:bg-white/10 cursor-pointer p-2 px-3 rounded-md transition-colors">
-                        Projects
+                        <a href="/portfolio" onClick={() => setIsOpen(false)}>Projects</a>
                       </li>
                       <li className="hover:bg-white/10 cursor-pointer p-2 px-3 rounded-md transition-colors">
-                        Contact
+                        <a href="/#contact" onClick={() => setIsOpen(false)}>Contact</a>
                       </li>
                     </ul>
                   </div>

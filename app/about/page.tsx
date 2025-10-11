@@ -1,13 +1,13 @@
-import Navbar from "@/components/Navbar"
+import Navigationbar from "@/components/Navigation"
 import Footer from "@/components/Footer"
-import AboutSection from "@/components/AboutSection"
+import AboutSection3 from "@/components/AboutSection3"
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navigationbar />
       <div className="pt-16">
-        <AboutSection />
+        <AboutSection3 />
       </div>
       <Footer />
     </div>

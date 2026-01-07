@@ -110,7 +110,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-secondary shadow-lg shadow-secondary/50 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-accent shadow-lg shadow-accent/50 grid place-items-center"
             >
               <HardHat className="w-6 h-6 text-white" />
             </motion.div>
@@ -118,7 +118,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-orange-500 shadow-lg shadow-orange-400 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-accent shadow-lg shadow-accent/50 grid place-items-center"
             >
               <Wrench className="w-6 h-6 text-white" />
             </motion.div>
@@ -129,7 +129,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-blue-600 shadow-lg shadow-blue-500 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-primary shadow-lg shadow-primary/50 grid place-items-center"
             >
               <Building2 className="w-6 h-6 text-white" />
             </motion.div>
@@ -137,7 +137,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-indigo-600 shadow-lg shadow-indigo-500 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-accent shadow-lg shadow-accent/50 grid place-items-center"
             >
               <Ruler className="w-6 h-6 text-white" />
             </motion.div>
@@ -145,7 +145,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-cyan-500 shadow-lg shadow-cyan-400 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-accent shadow-lg shadow-accent/50 grid place-items-center"
             >
               <HardHat className="w-6 h-6 text-white" />
             </motion.div>
@@ -156,7 +156,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-teal-600 shadow-lg shadow-teal-500 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-accent shadow-lg shadow-accent/50 grid place-items-center"
             >
               <Hammer className="w-6 h-6 text-white" />
             </motion.div>
@@ -164,7 +164,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-yellow-500 shadow-lg shadow-yellow-400 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-accent shadow-lg shadow-accent/50 grid place-items-center"
             >
               <Wrench className="w-6 h-6 text-white" />
             </motion.div>
@@ -172,7 +172,7 @@ const ServicesSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 2.5, duration: 0.5 }}
-              className="shrink-0 w-10 h-10 rounded-lg bg-red-600 shadow-lg shadow-red-500 grid place-items-center"
+              className="shrink-0 w-10 h-10 rounded-lg bg-primary shadow-lg shadow-primary/50 grid place-items-center"
             >
               <Building2 className="w-6 h-6 text-white" />
             </motion.div>
@@ -242,7 +242,7 @@ const ServicesSection = () => {
                     transition={{ delay: 2.8, duration: 0.5 }}
                   >
                     <TrendingUp
-                      className="fill-green-500 stroke-green-500"
+                      className="fill-accent stroke-accent"
                       size={20}
                     />
                   </motion.div>
@@ -253,7 +253,8 @@ const ServicesSection = () => {
 
             <div className="relative w-[32rem] h-[32rem] mx-auto grid place-content-center">
               <motion.div
-                className="absolute top-0 left-0 w-full h-full rounded-full [background:conic-gradient(#44497f_0_85%,#10b981_0_98%,#e5e5e5_0_2%)]"
+                className="absolute top-0 left-0 w-full h-full rounded-full"
+                style={{ background: 'conic-gradient(rgba(68, 66, 67, 1) 0 85%, rgba(201, 167, 95, 1) 0 98%, #e5e5e5 0 2%)' }}
                 initial={{ rotate: -90, scale: 0 }}
                 animate={{ rotate: 0, scale: 1 }}
                 transition={{ delay: 3.0, duration: 1.2, ease: "easeOut" }}
@@ -271,7 +272,7 @@ const ServicesSection = () => {
                 transition={{ delay: 3.2, duration: 0.6, type: "spring" }}
               >
                 <motion.span
-                  className="text-8xl font-semibold -translate-y-10 text-primary"
+                  className="text-8xl font-semibold -translate-y-10 text-accent"
                   initial={{ y: 0 }}
                   animate={{ y: -40 }}
                   transition={{ delay: 3.2, duration: 0.6, type: "spring" }}
@@ -303,29 +304,29 @@ const ServicesSection = () => {
             {[
               {
                 width: "85%",
-                color: "#44497f",
-                borderColor: "border-primary",
+                color: "rgba(201, 167, 95, 1)",
+                borderColor: "border-accent",
                 percentage: "45%",
                 platform: "Residential",
               },
               {
                 width: "65%",
-                color: "#10b981",
-                borderColor: "border-secondary",
+                color: "rgba(201, 167, 95, 0.8)",
+                borderColor: "border-accent",
                 percentage: "30%",
                 platform: "Commercial",
               },
               {
                 width: "45%",
-                color: "#f97316",
-                borderColor: "border-orange-500",
+                color: "rgba(68, 66, 67, 1)",
+                borderColor: "border-primary",
                 percentage: "15%",
                 platform: "Industrial",
               },
               {
                 width: "35%",
-                color: "#3b82f6",
-                borderColor: "border-blue-500",
+                color: "rgba(201, 167, 95, 0.6)",
+                borderColor: "border-accent",
                 percentage: "10%",
                 platform: "Renovation",
               },

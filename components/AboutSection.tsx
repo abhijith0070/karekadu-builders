@@ -44,7 +44,7 @@ export default function AboutSection3() {
           {/* Header with social icons */}
           <div className="flex justify-between items-center mb-8 w-[85%] absolute lg:top-4 md:top-0 sm:-top-2 -top-3 z-10">
             <div className="flex items-center gap-2  text-xl">
-              <span className="text-red-500 animate-spin">✱</span>
+              <span className="text-accent animate-spin">✱</span>
               <TimelineContent
                 as="span"
                 animationNum={0}
@@ -151,12 +151,12 @@ export default function AboutSection3() {
               className="flex gap-4"
             >
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-red-500 font-bold">10+</span>
+                <span className="text-accent font-bold">10+</span>
                 <span className="text-gray-600">years of experience</span>
                 <span className="text-gray-300">|</span>
               </div>
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-red-500 font-bold">3 million</span>
+                <span className="text-accent font-bold">3 million</span>
                 <span className="text-gray-600">words</span>
               </div>
             </TimelineContent>
@@ -168,7 +168,7 @@ export default function AboutSection3() {
                 customVariants={revealVariants}
                 className="flex lg:text-4xl sm:text-3xl text-2xl items-center gap-2 mb-2"
               >
-                <span className="text-red-500 font-semibold">100+</span>
+                <span className="text-accent font-semibold">100+</span>
                 <span className="text-gray-600 uppercase">brands</span>
               </TimelineContent>
               <TimelineContent
@@ -178,7 +178,7 @@ export default function AboutSection3() {
                 customVariants={revealVariants}
                 className="flex items-center gap-2 mb-2 sm:text-base text-xs"
               >
-                <span className="text-red-500 font-bold">30%</span>
+                <span className="text-accent font-bold">30%</span>
                 <span className="text-gray-600">higher engagement</span>
                 <span className="text-gray-300 lg:hidden block">|</span>
               </TimelineContent>
@@ -220,7 +220,7 @@ export default function AboutSection3() {
                 className="sm:text-base text-xs"
               >
                 <p className="leading-relaxed text-justify">
-                  At Karekadu Builders, we are dedicated to transforming your vision into reality. With over a decade of experience in residential, commercial, and industrial construction, our team delivers projects that stand the test of time.
+                  At KAREKADU BUILDERS & ARCHITECTS, we are dedicated to transforming your vision into reality. With over a decade of experience in residential, commercial, and industrial construction, our team delivers projects that stand the test of time.
                 </p>
               </TimelineContent>
               <TimelineContent
@@ -231,7 +231,7 @@ export default function AboutSection3() {
                 className="sm:text-base text-xs"
               >
                 <p className="leading-relaxed text-justify">
-                  We believe in quality craftsmanship, transparent communication, and innovative solutions. From concept to completion, Karekadu Builders is your trusted partner for building spaces that inspire and endure.
+                  We believe in quality craftsmanship, transparent communication, and innovative solutions. From concept to completion, KAREKADU BUILDERS & ARCHITECTS is your trusted partner for building spaces that inspire and endure.
                 </p>
               </TimelineContent>
             </TimelineContent>
@@ -244,9 +244,9 @@ export default function AboutSection3() {
                 animationNum={12}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="text-red-500 text-2xl font-bold mb-2"
+                className="text-accent text-2xl font-bold mb-2"
               >
-                KAREKADU BUILDERS
+                KAREKADU BUILDERS & ARCHITECTS
               </TimelineContent>
               <TimelineContent
                 as="div"

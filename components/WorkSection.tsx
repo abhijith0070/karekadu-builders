@@ -41,7 +41,7 @@ export default function WorkSection(): JSX.Element {
             </div>
             <div className='sticky top-0 h-screen grid place-content-center'>
               <h1 className='text-4xl px-8 font-medium text-right tracking-tight leading-[120%]'>
-                We don’t just build – we create spaces you’ll love! 😎 Explore Karekadu Builders’ projects and see our magic in action.
+                We don't just build – we create spaces you'll love! 😎 Explore KAREKADU BUILDERS & ARCHITECTS' projects and see our magic in action.
               </h1>
             </div>
           </div>

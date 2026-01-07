@@ -108,15 +108,15 @@ export default function AboutSection3() {
             {/* Company Name */}
             <motion.div variants={fadeInUp} className="mb-6">
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
-                Karekadu Builders
+                KAREKADU BUILDERS & ARCHITECTS
               </h1>
-              <div className="h-1.5 w-24 bg-blue-500 rounded-full" />
+              <div className="h-1.5 w-24 bg-accent rounded-full" />
             </motion.div>
 
             {/* Tagline */}
             <motion.h2 
               variants={fadeInUp}
-              className="text-2xl md:text-4xl font-semibold text-blue-400 mb-8"
+              className="text-2xl md:text-4xl font-semibold text-accent mb-8"
             >
               Designing Dreams. Building Legacies.
             </motion.h2>
@@ -126,7 +126,7 @@ export default function AboutSection3() {
               variants={fadeInUp}
               className="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 max-w-3xl"
             >
-              Karekadu Builders blends modern engineering with traditional values to craft timeless spaces that inspire living. From residential villas to commercial landmarks, we build with precision, passion, and purpose.
+              KAREKADU BUILDERS & ARCHITECTS blends modern engineering with traditional values to craft timeless spaces that inspire living. From residential villas to commercial landmarks, we build with precision, passion, and purpose.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -136,7 +136,7 @@ export default function AboutSection3() {
             >
               <button
                 onClick={() => router.push('/portfolio')}
-                className="group bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg flex items-center gap-3 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-blue-500/50"
+                className="group bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-semibold text-lg flex items-center gap-3 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-accent/50"
               >
                 Explore Projects
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -156,7 +156,7 @@ export default function AboutSection3() {
             >
               {stats.map((stat, index) => (
                 <div key={index} className="text-center md:text-left">
-                  <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+                  <div className="text-3xl md:text-4xl font-bold text-accent mb-2">
                     {stat.number}
                   </div>
                   <div className="text-sm text-gray-400 uppercase tracking-wider">
@@ -197,7 +197,7 @@ export default function AboutSection3() {
               viewport={{ once: true }}
             >
               <div className="mb-4">
-                <span className="text-blue-600 font-semibold uppercase tracking-wider text-sm">
+                <span className="text-accent font-semibold uppercase tracking-wider text-sm">
                   About Us
                 </span>
               </div>
@@ -205,7 +205,7 @@ export default function AboutSection3() {
                 Building Excellence Since 2008
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                With over 15 years of experience, Karekadu Builders has established itself as a trusted name in construction excellence. We specialize in creating architectural masterpieces that combine aesthetic beauty with structural integrity.
+                With over 15 years of experience, KAREKADU BUILDERS & ARCHITECTS has established itself as a trusted name in construction excellence. We specialize in creating architectural masterpieces that combine aesthetic beauty with structural integrity.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 Our commitment to quality, innovation, and client satisfaction has made us the preferred choice for residential villas, commercial complexes, and landmark projects across the region.
@@ -220,7 +220,7 @@ export default function AboutSection3() {
                   "Expert Engineering Team"
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-blue-600 flex-shrink-0" />
+                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0" />
                     <span className="text-gray-700 font-medium">{feature}</span>
                   </div>
                 ))}
@@ -240,7 +240,7 @@ export default function AboutSection3() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="text-blue-600 font-semibold uppercase tracking-wider text-sm mb-2 block">
+            <span className="text-accent font-semibold uppercase tracking-wider text-sm mb-2 block">
               Our Leadership
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
@@ -288,7 +288,7 @@ export default function AboutSection3() {
           >
             <button
               onClick={() => router.push('/portfolio')}
-              className="group inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/30"
+              className="group inline-flex items-center gap-3 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-accent/30"
             >
               See All Projects
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

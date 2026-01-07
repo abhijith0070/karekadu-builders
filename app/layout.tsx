@@ -1,13 +1,11 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'kk App',
-  description: 'Created with kk',
-  generator: 'kk.app',
+  title: 'KAREKADU BUILDERS & ARCHITECTS - Premium Construction & Architecture Services',
+  description: 'KAREKADU BUILDERS & ARCHITECTS delivers exceptional construction and architectural solutions. From residential villas to commercial landmarks, we build with precision, passion, and purpose.',
+  generator: 'Next.js',
 }
 
 export default function RootLayout({
@@ -17,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+      <head>
+        <link href="https://fonts.cdnfonts.com/css/trajan-pro" rel="stylesheet" />
+      </head>
+      <body className="font-sans">
         {children}
         <Analytics />
       </body>

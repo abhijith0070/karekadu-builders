@@ -4,80 +4,81 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color tokens to match Karekadu Builders brand with #44497f primary and construction-focused palette */
-  --background: oklch(1 0 0); /* Pure white background */
-  --foreground: oklch(0.3 0.05 258); /* #44497f converted to oklch */
-  --card: oklch(0.97 0.005 240); /* Light gray for cards */
-  --card-foreground: oklch(0.3 0.05 258); /* Primary color for card text */
-  --popover: oklch(1 0 0); /* White popover background */
-  --popover-foreground: oklch(0.3 0.05 258); /* Primary text on popovers */
-  --primary: oklch(0.3 0.05 258); /* #44497f primary brand color */
-  --primary-foreground: oklch(1 0 0); /* White text on primary */
-  --secondary: oklch(0.65 0.15 162); /* Emerald green accent #10b981 */
-  --secondary-foreground: oklch(1 0 0); /* White text on secondary */
-  --muted: oklch(0.97 0.005 240); /* Light muted background */
-  --muted-foreground: oklch(0.45 0.02 258); /* Muted text color */
-  --accent: oklch(0.65 0.15 162); /* Emerald green accent */
-  --accent-foreground: oklch(1 0 0); /* White text on accent */
+  /* KAREKADU BUILDERS & ARCHITECTS Brand Colors - Exact Values */
+  --background: #FFFFFF; /* Pure white background */
+  --foreground: rgba(68, 66, 67, 1); /* Charcoal - primary text */
+  --card: #FFFFFF; /* White for cards */
+  --card-foreground: rgba(68, 66, 67, 1); /* Charcoal for card text */
+  --popover: #FFFFFF; /* White popover background */
+  --popover-foreground: rgba(68, 66, 67, 1); /* Charcoal text on popovers */
+  --primary: rgba(68, 66, 67, 1); /* Charcoal primary brand color */
+  --primary-foreground: #FFFFFF; /* White text on primary */
+  --secondary: rgba(68, 66, 67, 1); /* Charcoal secondary */
+  --secondary-foreground: #FFFFFF; /* White text on secondary */
+  --muted: #F5F5F5; /* Very light gray for muted backgrounds */
+  --muted-foreground: rgba(68, 66, 67, 0.7); /* Muted charcoal text */
+  --accent: rgba(201, 167, 95, 1); /* Gold/Amber accent - use sparingly */
+  --accent-foreground: rgba(68, 66, 67, 1); /* Charcoal text on accent */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.45 0.02 258); /* Border using muted primary */
-  --input: oklch(1 0 0); /* White input background */
-  --ring: oklch(0.65 0.15 162 / 0.5); /* Emerald ring with transparency */
-  --chart-1: oklch(0.65 0.15 162); /* Emerald */
-  --chart-2: oklch(0.3 0.05 258); /* Primary blue */
-  --chart-3: oklch(0.6 0.2 35); /* Orange */
-  --chart-4: oklch(0.7 0.15 85); /* Yellow-green */
-  --chart-5: oklch(0.55 0.18 150); /* Teal */
-  --radius: 0.5rem; /* Slightly smaller radius for professional look */
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.3 0.05 258);
-  --sidebar-primary: oklch(0.65 0.15 162);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.65 0.15 162);
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.45 0.02 258);
-  --sidebar-ring: oklch(0.65 0.15 162 / 0.5);
+  --border: rgba(68, 66, 67, 0.2); /* Subtle charcoal border */
+  --input: #FFFFFF; /* White input background */
+  --ring: rgba(201, 167, 95, 0.5); /* Gold ring with transparency */
+  --chart-1: rgba(201, 167, 95, 1); /* Gold accent */
+  --chart-2: rgba(68, 66, 67, 1); /* Charcoal */
+  --chart-3: rgba(201, 167, 95, 0.7); /* Gold variation */
+  --chart-4: rgba(68, 66, 67, 0.6); /* Charcoal variation */
+  --chart-5: rgba(201, 167, 95, 0.5); /* Gold variation */
+  --radius: 0.5rem;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: rgba(68, 66, 67, 1);
+  --sidebar-primary: rgba(201, 167, 95, 1);
+  --sidebar-primary-foreground: rgba(68, 66, 67, 1);
+  --sidebar-accent: rgba(201, 167, 95, 1);
+  --sidebar-accent-foreground: rgba(68, 66, 67, 1);
+  --sidebar-border: rgba(68, 66, 67, 0.2);
+  --sidebar-ring: rgba(201, 167, 95, 0.5);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --background: rgba(68, 66, 67, 1);
+  --foreground: #FFFFFF;
+  --card: rgba(68, 66, 67, 1);
+  --card-foreground: #FFFFFF;
+  --popover: rgba(68, 66, 67, 1);
+  --popover-foreground: #FFFFFF;
+  --primary: #FFFFFF;
+  --primary-foreground: rgba(68, 66, 67, 1);
+  --secondary: rgba(68, 66, 67, 0.8);
+  --secondary-foreground: #FFFFFF;
+  --muted: rgba(68, 66, 67, 0.8);
+  --muted-foreground: rgba(255, 255, 255, 0.7);
+  --accent: rgba(201, 167, 95, 1);
+  --accent-foreground: rgba(68, 66, 67, 1);
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(255, 255, 255, 0.2);
+  --input: rgba(68, 66, 67, 0.8);
+  --ring: rgba(201, 167, 95, 0.5);
+  --chart-1: rgba(201, 167, 95, 1);
+  --chart-2: #FFFFFF;
+  --chart-3: rgba(201, 167, 95, 0.7);
+  --chart-4: rgba(255, 255, 255, 0.6);
+  --chart-5: rgba(201, 167, 95, 0.5);
+  --sidebar: rgba(68, 66, 67, 1);
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: rgba(201, 167, 95, 1);
+  --sidebar-primary-foreground: rgba(68, 66, 67, 1);
+  --sidebar-accent: rgba(201, 167, 95, 1);
+  --sidebar-accent-foreground: rgba(68, 66, 67, 1);
+  --sidebar-border: rgba(255, 255, 255, 0.2);
+  --sidebar-ring: rgba(201, 167, 95, 0.5);
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Trajan Pro', 'Times New Roman', serif;
+  --font-mono: 'Trajan Pro', 'Times New Roman', serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -122,6 +123,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Trajan Pro', 'Times New Roman', serif;
   }
 }
 

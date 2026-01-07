@@ -68,7 +68,7 @@ function ClientFeedback() {
                 </div>
               </article>
             </TimelineContent>
-            <TimelineContent animationNum={1} customVariants={revealVariants} timelineRef={testimonialRef} className="lg:flex-[3] flex-[4] lg:h-fit  lg:shrink-0 flex flex-col justify-between relative bg-blue-600 text-white overflow-hidden rounded-lg border border-gray-200 p-5">
+            <TimelineContent animationNum={1} customVariants={revealVariants} timelineRef={testimonialRef} className="lg:flex-[3] flex-[4] lg:h-fit  lg:shrink-0 flex flex-col justify-between relative bg-accent text-white overflow-hidden rounded-lg border border-gray-200 p-5">
               <article className="mt-auto">
                 <p>
                   "We've seen incredible results with Hypersphere. Their
@@ -160,7 +160,7 @@ function ClientFeedback() {
             </TimelineContent>
           </div>
           <div className="h-full md:flex lg:flex-col lg:space-y-2 lg:gap-0 gap-2">
-            <TimelineContent animationNum={5} customVariants={revealVariants} timelineRef={testimonialRef} className=" lg:flex-[3] flex-[4] flex flex-col justify-between relative bg-blue-600 text-white overflow-hidden rounded-lg border border-gray-200 p-5">
+            <TimelineContent animationNum={5} customVariants={revealVariants} timelineRef={testimonialRef} className=" lg:flex-[3] flex-[4] flex flex-col justify-between relative bg-accent text-white overflow-hidden rounded-lg border border-gray-200 p-5">
               <article className="mt-auto">
                 <p>
                   "Hypersphere has been a key partner in our growth journey."

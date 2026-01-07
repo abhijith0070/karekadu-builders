@@ -33,8 +33,8 @@ export default function Navigationbar() {
     <>
       <header className='flex justify-between border items-center p-3 rounded-md dark:bg-black/45 backdrop-blur-md'>
        <div className="flex items-center gap-3">
-      <Image src="/logo.png" alt="Logo" width={50} height={50} />
-      <h1 className="text-2xl font-bold">KAREKADU BUILDERS</h1>
+      <Image src="/llogo2.jpg" alt="Logo" width={50} height={50} />
+      <h1 className="text-2xl font-bold" style={{ color: 'rgba(55, 53, 54)' }}>KAREKADU BUILDERS & ARCHITECTS</h1>
     </div>
         <HeaderDrawer
           open={headerOpen}
@@ -63,7 +63,7 @@ export default function Navigationbar() {
                     <X />
                   </button>
                 )}
-                <h1 className='mx-auto text-2xl'>KAREKADU BUILDERS</h1>
+                <h1 className='mx-auto text-2xl' style={{ color: 'rgba(55, 53, 54)' }}>KAREKADU BUILDERS & ARCHITECTS</h1>
               </div>
               <div className='flex justify-between  py-2'>
                 <nav className='flex gap-8'>

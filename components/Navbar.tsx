@@ -15,17 +15,17 @@ export default function Navigation() {
       {!isMobile ? (
         <>
           <div className="flex items-center gap-3">
-            <img src="/logoo.png" alt="Logo" width={40} height={40} />
-            <h1 className="text-xl font-bold text-primary uppercase">
-              Karekadu Builders
+            <img src="/llogo2.jpg" alt="Logo" width={40} height={40} />
+            <h1 className="text-xl font-bold uppercase" style={{ color: 'rgba(55, 53, 54)' }}>
+              KAREKADU BUILDERS & ARCHITECTS
             </h1>
           </div>
           <nav className="flex gap-4 font-medium">
-            <a href="/">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#services">Services</a>
-            <a href="/portfolio">Projects</a>
-            <a href="/#contact">Contact</a>
+            <a href="/" className="hover:text-accent transition-colors">Home</a>
+            <a href="/#about" className="hover:text-accent transition-colors">About</a>
+            <a href="/#services" className="hover:text-accent transition-colors">Services</a>
+            <a href="/portfolio" className="hover:text-accent transition-colors">Projects</a>
+            <a href="/#contact" className="hover:text-accent transition-colors">Contact</a>
           </nav>
           <button className="text-lg h-10 px-4 rounded-lg text-white flex items-center gap-2 bg-primary hover:bg-primary/90 transition-all">
             Get Quote
@@ -35,9 +35,9 @@ export default function Navigation() {
         /* Mobile Navigation (Drawer) */
         <>
           <div className="flex items-center gap-2">
-            <img src="/logoo.png" alt="Logo" width={35} height={35} />
-            <h1 className="text-sm font-bold text-primary uppercase">
-              Karekadu Builders
+            <img src="/llogo2.jpg" alt="Logo" width={35} height={35} />
+            <h1 className="text-sm font-bold uppercase" style={{ color: 'rgba(55, 53, 54)' }}>
+              KAREKADU BUILDERS & ARCHITECTS
             </h1>
           </div>
           <Drawer.Root direction="left" open={isOpen} onOpenChange={setIsOpen}>
@@ -58,13 +58,13 @@ export default function Navigation() {
                   <div className="w-full flex justify-between items-center">
                     <div className="flex gap-2 px-4 flex-shrink-0 items-center text-lg font-semibold">
                       <img
-                        src="/logoo.png"
+                        src="/llogo2.jpg"
                         alt="Logo"
                         width={30}
                         height={30}
                         className="brightness-0 invert"
                       />
-                      <span>KAREKADU BUILDERS</span>
+                      <span>KAREKADU BUILDERS & ARCHITECTS</span>
                     </div>
                     <button
                       className="rounded-md w-fit bg-white/10 hover:bg-white/20 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors"

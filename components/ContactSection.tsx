@@ -76,10 +76,10 @@ const mapVariants: Variants = {
 // Social Media Links Component
 const SocialLinks = ({ timelineRef }: { timelineRef: React.RefObject<HTMLElement> }) => {
   const socialLinks = [
-    { name: 'Facebook', href: 'https://facebook.com', icon: FaFacebookF, color: 'hover:text-blue-600' },
-    { name: 'Twitter', href: 'https://twitter.com', icon: FaTwitter, color: 'hover:text-blue-400' },
-    { name: 'LinkedIn', href: 'https://linkedin.com', icon: FaLinkedinIn, color: 'hover:text-blue-700' },
-    { name: 'Instagram', href: 'https://instagram.com', icon: FaInstagram, color: 'hover:text-pink-600' }
+    { name: 'Facebook', href: 'https://facebook.com', icon: FaFacebookF, color: 'hover:text-accent' },
+    { name: 'Twitter', href: 'https://twitter.com', icon: FaTwitter, color: 'hover:text-accent' },
+    { name: 'LinkedIn', href: 'https://linkedin.com', icon: FaLinkedinIn, color: 'hover:text-accent' },
+    { name: 'Instagram', href: 'https://instagram.com', icon: FaInstagram, color: 'hover:text-accent' }
   ];
 
   return (
@@ -123,7 +123,7 @@ const GoogleMapEmbed = () => {
         allowFullScreen={true}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="Karekadu Builders Location - Manjari, Navsari, Gujarat"
+        title="KAREKADU BUILDERS & ARCHITECTS Location - Manjari, Navsari, Gujarat"
       />
     </div>
   );
@@ -218,7 +218,7 @@ export default function ContactSection() {
                 >
                   <h3 className="text-gray-800 font-semibold text-lg mb-3">Address</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    Karekadu Builders<br />
+                    KAREKADU BUILDERS & ARCHITECTS<br />
                     Manjari, Navsari<br />
                     Gujarat 396321
                   </p>

@@ -161,7 +161,7 @@ function OrganizationHero() {
                     customVariants={simpleRevealVariants}
                     className="inline-flex gap-2 items-center bg-black text-white w-fit py-2 px-3 text-xs sm:text-sm rounded-md mx-auto lg:mx-0"
                   >
-                    <span className="bg-blue-500 px-1.5 py-0.5 rounded-sm text-[10px] sm:text-xs">NEW</span> 
+                    <span className="bg-accent text-accent-foreground px-1.5 py-0.5 rounded-sm text-[10px] sm:text-xs font-semibold">NEW</span> 
                     <span className="hidden sm:inline">Building Excellence, One Project at a Time</span>
                     <span className="sm:hidden">Excellence in Building</span>
                   </TimelineContent>
@@ -184,7 +184,7 @@ function OrganizationHero() {
                         animationNum={4}
                         timelineRef={heroRef}
                         customVariants={simpleScaleVariants}
-                        className="text-blue-500 bg-blue-500/20 backdrop-blur-md rounded-xl border-2 border-blue-300 px-2 sm:px-3 py-1 inline-block"
+                        className="text-accent bg-accent/20 backdrop-blur-md rounded-xl border-2 border-accent/30 px-2 sm:px-3 py-1 inline-block"
                       >
                         Last
                       </TimelineContent>
@@ -199,7 +199,7 @@ function OrganizationHero() {
                     customVariants={simpleRevealVariants}
                     className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-lg mx-auto lg:mx-0 leading-relaxed"
                   >
-                    From residential homes to commercial complexes, Karekadu Builders delivers quality construction with precision, innovation, and dedication to excellence.
+                    From residential homes to commercial complexes, KAREKADU BUILDERS & ARCHITECTS delivers quality construction with precision, innovation, and dedication to excellence.
                   </TimelineContent>
                   
                   {/* CTA Buttons */}
@@ -210,7 +210,7 @@ function OrganizationHero() {
                     customVariants={simpleScaleVariants}
                     className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6 justify-center lg:justify-start"
                   >
-                    <button className="w-full sm:w-auto text-white bg-gradient-to-t from-blue-500 to-blue-400 shadow-md shadow-blue-500/25 border border-blue-500 px-6 py-3 rounded-lg flex items-center justify-center gap-2 hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base">
+                    <button className="w-full sm:w-auto text-white bg-gradient-to-t from-accent to-accent/90 shadow-md shadow-accent/25 border border-accent px-6 py-3 rounded-lg flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-accent/40 hover:scale-105 transition-all duration-300 text-sm sm:text-base">
                       <Sparkles size={18} />
                       Start Your Project
                     </button>
@@ -234,7 +234,7 @@ function OrganizationHero() {
                     <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
                       <Image
                         src="/hero.jpg"
-                        alt="Karekadu Builders - Premium Construction"
+                        alt="KAREKADU BUILDERS & ARCHITECTS - Premium Construction"
                         fill
                         className="object-cover"
                         priority
@@ -290,8 +290,8 @@ function OrganizationHero() {
                     </TimelineContent>
 
                     {/* Decorative Elements */}
-                    <div className="absolute -top-4 -right-4 w-16 h-16 xl:w-24 xl:h-24 bg-blue-500/10 rounded-full blur-2xl"></div>
-                    <div className="absolute bottom-8 right-32 xl:right-40 w-24 h-24 xl:w-32 xl:h-32 bg-purple-500/10 rounded-full blur-2xl"></div>
+                    <div className="absolute -top-4 -right-4 w-16 h-16 xl:w-24 xl:h-24 bg-accent/10 rounded-full blur-2xl"></div>
+                    <div className="absolute bottom-8 right-32 xl:right-40 w-24 h-24 xl:w-32 xl:h-32 bg-accent/10 rounded-full blur-2xl"></div>
                   </div>
                 </TimelineContent>
               </div>
@@ -333,7 +333,7 @@ function OrganizationHero() {
                         onClick={openVideoModal}
                       >
                         <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
-                          <div className="w-0 h-0 border-l-[20px] sm:border-l-[24px] border-l-blue-500 border-t-[12px] sm:border-t-[14px] border-t-transparent border-b-[12px] sm:border-b-[14px] border-b-transparent ml-1"></div>
+                          <div className="w-0 h-0 border-l-[20px] sm:border-l-[24px] border-l-accent border-t-[12px] sm:border-t-[14px] border-t-transparent border-b-[12px] sm:border-b-[14px] border-b-transparent ml-1"></div>
                         </div>
                       </div>
 

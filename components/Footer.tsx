@@ -77,7 +77,7 @@ const Footer = () => {
                     />
                     <button
                       type='submit'
-                      className='cursor-pointer w-full hover:bg-orange-500 bg-white text-white h-full cols-span-1 transition-colors duration-300'
+                      className='cursor-pointer w-full hover:bg-accent bg-white text-white h-full cols-span-1 transition-colors duration-300'
                     >
                       <svg
                         width='15'
@@ -131,7 +131,7 @@ const Footer = () => {
                   <a
                     href='https://www.linkedin.com/company/karekadu-builders/'
                     target='_blank'
-                    className='underline hover:text-orange-500 transition-colors'
+                    className='underline hover:text-accent transition-colors'
                   >
                     LinkedIn
                   </a>
@@ -140,7 +140,7 @@ const Footer = () => {
                   <a
                     href='https://twitter.com/KarekaduBuilders'
                     target='_blank'
-                    className='underline hover:text-orange-500 transition-colors'
+                    className='underline hover:text-accent transition-colors'
                   >
                     Twitter
                   </a>
@@ -149,7 +149,7 @@ const Footer = () => {
                   <a
                     href='https://www.instagram.com/karekadubuilders/'
                     target='_blank'
-                    className='underline hover:text-orange-500 transition-colors'
+                    className='underline hover:text-accent transition-colors'
                   >
                     Instagram
                   </a>
@@ -158,7 +158,7 @@ const Footer = () => {
                   <a
                     href='https://www.facebook.com/karekadubuilders'
                     target='_blank'
-                    className='underline hover:text-orange-500 transition-colors'
+                    className='underline hover:text-accent transition-colors'
                   >
                     Facebook
                   </a>
@@ -179,7 +179,7 @@ const Footer = () => {
               {/* Replace with your PNG logo */}
               <Image
                 src="/logo.png" // Put your logo in public folder
-                alt="Karekadu Builders - Premium Construction & Architecture"
+                alt="KAREKADU BUILDERS & ARCHITECTS - Premium Construction & Architecture"
                 width={400}
                 height={120}
                 className='h-16 md:h-24 w-auto object-contain filter hover:brightness-110 transition-all duration-300'
@@ -193,13 +193,13 @@ const Footer = () => {
 
           <div className='flex md:flex-row flex-col-reverse gap-3 justify-between py-2'>
             <span className='font-medium'>
-              &copy; 2024 Karekadu Builders. All Rights Reserved.
+              &copy; 2024 KAREKADU BUILDERS & ARCHITECTS. All Rights Reserved.
             </span>
             <div className='flex gap-4'>
-              <a href='#' className='font-semibold hover:text-orange-500 transition-colors'>
+              <a href='#' className='font-semibold hover:text-accent transition-colors'>
                 Privacy Policy
               </a>
-              <a href='#' className='font-semibold hover:text-orange-500 transition-colors'>
+              <a href='#' className='font-semibold hover:text-accent transition-colors'>
                 Terms of Service
               </a>
             </div>

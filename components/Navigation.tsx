@@ -2,12 +2,14 @@
 import { useState } from 'react';
 import { MenuIcon, X } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import {
   DrawerContent,
   HeaderDrawer,
 } from '@/components/ui/responsive-header';
 import Image from 'next/image';
+
 const items = [
   {
     id: 1,
@@ -25,126 +27,190 @@ const items = [
     id: 3,
   },
 ];
+
 export default function Navigationbar() {
   const [headerOpen, setHeaderOpen] = useState(false);
-  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const pathname = usePathname();
+  const isAboutPage = pathname === '/about';
 
   return (
     <>
-      <header className='flex justify-between border items-center p-3 rounded-md dark:bg-black/45 backdrop-blur-md'>
-       <div className="flex items-center gap-3">
-      <Image src="/llogo2.jpg" alt="Logo" width={50} height={50} />
-      <h1 className="text-2xl font-bold" style={{ color: 'rgba(55, 53, 54)' }}>KAREKADU BUILDERS & ARCHITECTS</h1>
-    </div>
-        <HeaderDrawer
-          open={headerOpen}
-          setOpen={setHeaderOpen}
-          drawerBtn={() => {
-            return (
-              <button>
-                <MenuIcon />
-              </button>
-            );
-          }}
-        >
-          <DrawerContent>
-            {!isDesktop && (
+      <header className={`flex justify-between items-center p-3 rounded-md transition-all duration-300 ${
+        isAboutPage 
+          ? 'bg-transparent border-transparent backdrop-blur-none' 
+          : 'border dark:bg-black/45 backdrop-blur-md'
+      }`}>
+        <div className="flex items-center gap-3">
+          <Image src="/llogo.png" alt="Logo" width={50} height={50} />
+          <h1 
+            className="text-2xl font-bold transition-colors duration-300" 
+            style={{ color: isAboutPage ? 'rgba(255, 255, 255, 0.95)' : 'rgba(55, 53, 54)' }}
+          >
+            KAREKADU BUILDERS & ARCHITECTS
+          </h1>
+        </div>
+
+        {/* Desktop Horizontal Navigation */}
+        {isDesktop ? (
+          <nav className='flex items-center gap-8'>
+            <Link
+              href='/'
+              className={`relative text-lg font-semibold uppercase transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                isAboutPage 
+                  ? 'text-white/80 hover:text-white after:bg-white' 
+                  : 'dark:after:bg-white after:bg-neutral-800'
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              href='/about'
+              className={`relative text-lg font-semibold uppercase transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                isAboutPage 
+                  ? 'text-white/80 hover:text-white after:bg-white' 
+                  : 'dark:after:bg-white after:bg-neutral-800'
+              }`}
+            >
+              About Us
+            </Link>
+            <Link
+              href='/layouts'
+              className={`relative text-lg font-semibold uppercase transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                isAboutPage 
+                  ? 'text-white/80 hover:text-white after:bg-white' 
+                  : 'dark:after:bg-white after:bg-neutral-800'
+              }`}
+            >
+              Our Services
+            </Link>
+            <Link
+              href='/portfolio'
+              className={`relative text-lg font-semibold uppercase transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                isAboutPage 
+                  ? 'text-white/80 hover:text-white after:bg-white' 
+                  : 'dark:after:bg-white after:bg-neutral-800'
+              }`}
+            >
+              Projects
+            </Link>
+            <Link
+              href='/templates'
+              className={`relative text-lg font-semibold uppercase transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                isAboutPage 
+                  ? 'text-white/80 hover:text-white after:bg-white' 
+                  : 'dark:after:bg-white after:bg-neutral-800'
+              }`}
+            >
+              Blogs
+            </Link>
+            <Link
+              href='/open-source'
+              className={`relative text-lg font-semibold uppercase transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                isAboutPage 
+                  ? 'text-white/80 hover:text-white after:bg-white' 
+                  : 'dark:after:bg-white after:bg-neutral-800'
+              }`}
+            >
+              Contact Us
+            </Link>
+          </nav>
+        ) : (
+          /* Mobile/Tablet Hamburger Menu */
+          <HeaderDrawer
+            open={headerOpen}
+            setOpen={setHeaderOpen}
+            drawerBtn={() => {
+              return (
+                <button className={isAboutPage ? 'text-white' : ''}>
+                  <MenuIcon />
+                </button>
+              );
+            }}
+          >
+            <DrawerContent>
               <div className='flex justify-center w-full absolute bottom-1 left-0 '>
                 <div className=' w-16 h-[0.30rem] flex-shrink-0 rounded-full bg-gray-600 my-4' />
               </div>
-            )}
-            <div className='container mx-auto  gap-4'>
-              <div className='flex justify-between items-center border-b'>
-                {isDesktop && (
-                  <button
-                    className='flex justify-start p-2 mb-2 rounded-md dark:bg-white dark:text-black bg-black text-white'
-                    onClick={() => setHeaderOpen(false)}
-                  >
-                    <X />
-                  </button>
-                )}
-                <h1 className='mx-auto text-2xl' style={{ color: 'rgba(55, 53, 54)' }}>KAREKADU BUILDERS & ARCHITECTS</h1>
-              </div>
-              <div className='flex justify-between  py-2'>
-                <nav className='flex gap-8'>
-                  <ul className='xl:text-2xl text-lg space-y-2 xl:space-y-4 font-semibold uppercase  pr-8'>
-                    <li>
-                      <Link
-                        href='/'
-                        className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white 
-      after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
-                      >
-                        Home
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/about'
-                        className='relative flex gap-2 items-center after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white 
-      after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
-                      >
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/layouts'
-                        className='relative flex gap-2 items-center after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white 
-      after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
-                      >
-                        Our Services
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/portfolio'
-                        className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white 
-      after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
-                      >
-                        Projects
-                      </Link>
-                    </li>
-                       <li>
-                      <Link
-                        href='/templates'
-                        className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white 
-      after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
-                      >
-                        Blogs
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/open-source'
-                        className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white 
-      after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
-                      >
-                        Contact Us
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-
-                <div className='grid grid-cols-3 gap-4 py-4 pr-20 w-full'>
-                  <>
-                    {items.map((item) => (
-                      <figure
-                        key={item.id}
-                        className={` inline-block group w-full xl:h-52 h-full relative rounded-md `}
+              <div className='container mx-auto gap-4'>
+                <div className='flex justify-between items-center border-b'>
+                  <h1 className='mx-auto text-2xl py-4' style={{ color: 'rgba(55, 53, 54)' }}>KAREKADU BUILDERS & ARCHITECTS</h1>
+                </div>
+                <div className='flex justify-between py-2'>
+                  <nav className='flex gap-8'>
+                    <ul className='text-lg space-y-4 font-semibold uppercase pr-8'>
+                      <li>
+                        <Link
+                          href='/'
+                          className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
                         >
-                        <img
-                          src={item.src}
-                          alt={item.alt}
-                          className='object-cover transition-transform duration-500 group-hover:scale-110'
-                        />
-                      </figure>
-                    ))}
-                  </>
+                          Home
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href='/about'
+                          className='relative flex gap-2 items-center after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
+                        >
+                          About Us
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href='/layouts'
+                          className='relative flex gap-2 items-center after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
+                        >
+                          Our Services
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href='/portfolio'
+                          className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
+                        >
+                          Projects
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href='/templates'
+                          className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
+                        >
+                          Blogs
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href='/open-source'
+                          className='relative flex items-center gap-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 dark:after:bg-white after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100'
+                        >
+                          Contact Us
+                        </Link>
+                      </li>
+                    </ul>
+                  </nav>
+
+                  <div className='grid grid-cols-3 gap-4 py-4 pr-20 w-full'>
+                    <>
+                      {items.map((item) => (
+                        <figure
+                          key={item.id}
+                          className='inline-block group w-full h-full relative rounded-md'
+                        >
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            className='object-cover transition-transform duration-500 group-hover:scale-110'
+                          />
+                        </figure>
+                      ))}
+                    </>
+                  </div>
                 </div>
               </div>
-            </div>
-          </DrawerContent>
-        </HeaderDrawer>
+            </DrawerContent>
+          </HeaderDrawer>
+        )}
       </header>
     </>
   );

@@ -14,7 +14,7 @@ export default function PortfolioSection() {
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300">
+          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300 cursor-hover">
             <div className="relative overflow-hidden">
               <img
                 src="/placeholder-70vzb.png"
@@ -35,7 +35,7 @@ export default function PortfolioSection() {
             </CardContent>
           </Card>
 
-          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300">
+          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300 cursor-hover">
             <div className="relative overflow-hidden">
               <img
                 src="/placeholder-uhota.png"
@@ -56,7 +56,7 @@ export default function PortfolioSection() {
             </CardContent>
           </Card>
 
-          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300">
+          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300 cursor-hover">
             <div className="relative overflow-hidden">
               <img
                 src="/placeholder-bywl2.png"
@@ -77,7 +77,7 @@ export default function PortfolioSection() {
             </CardContent>
           </Card>
 
-          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300">
+          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300 cursor-hover">
             <div className="relative overflow-hidden">
               <img
                 src="/shopping-mall-retail-complex-modern-architecture.jpg"
@@ -98,7 +98,7 @@ export default function PortfolioSection() {
             </CardContent>
           </Card>
 
-          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300">
+          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300 cursor-hover">
             <div className="relative overflow-hidden">
               <img
                 src="/placeholder-47e94.png"
@@ -119,7 +119,7 @@ export default function PortfolioSection() {
             </CardContent>
           </Card>
 
-          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300">
+          <Card className="group overflow-hidden border-0 bg-card hover:shadow-xl transition-all duration-300 cursor-hover">
             <div className="relative overflow-hidden">
               <img
                 src="/placeholder-5tdrq.png"

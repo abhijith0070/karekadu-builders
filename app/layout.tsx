@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import CustomCursor from '@/components/CustomCursor'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
         <link href="https://fonts.cdnfonts.com/css/trajan-pro" rel="stylesheet" />
       </head>
       <body className="font-sans">
+        <CustomCursor />
         {children}
         <Analytics />
       </body>

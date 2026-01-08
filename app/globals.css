@@ -225,3 +225,29 @@
 .delay-300 { animation-delay: 0.3s; }
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
+
+/* Custom Cursor Styles - Desktop Only */
+@media (min-width: 1024px) {
+  /* Keep native cursor visible - layered animation approach */
+  
+  .custom-cursor {
+    will-change: transform;
+  }
+
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(201, 167, 95, 1);
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translate(-50%, -50%);
+  }
+
+  .custom-cursor.active .cursor-dot {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid rgba(201, 167, 95, 0.6);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

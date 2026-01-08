@@ -15,7 +15,7 @@ export default function Navigation() {
       {!isMobile ? (
         <>
           <div className="flex items-center gap-3">
-            <img src="/llogo2.jpg" alt="Logo" width={40} height={40} />
+            <img src="/llogo.png" alt="Logo" width={40} height={40} />
             <h1 className="text-xl font-bold uppercase" style={{ color: 'rgba(55, 53, 54)' }}>
               KAREKADU BUILDERS & ARCHITECTS
             </h1>
@@ -35,7 +35,7 @@ export default function Navigation() {
         /* Mobile Navigation (Drawer) */
         <>
           <div className="flex items-center gap-2">
-            <img src="/llogo2.jpg" alt="Logo" width={35} height={35} />
+            <img src="/llogo.png" alt="Logo" width={35} height={35} />
             <h1 className="text-sm font-bold uppercase" style={{ color: 'rgba(55, 53, 54)' }}>
               KAREKADU BUILDERS & ARCHITECTS
             </h1>
@@ -58,7 +58,7 @@ export default function Navigation() {
                   <div className="w-full flex justify-between items-center">
                     <div className="flex gap-2 px-4 flex-shrink-0 items-center text-lg font-semibold">
                       <img
-                        src="/llogo2.jpg"
+                        src="/llogo.png"
                         alt="Logo"
                         width={30}
                         height={30}

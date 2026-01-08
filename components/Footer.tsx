@@ -1,212 +1,269 @@
 'use client';
-import React, { FormEvent, useRef, useState } from 'react';
-import { motion, useInView } from 'motion/react';
+import React, { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Linkedin, Twitter, Instagram, Facebook, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
-  const container = useRef<HTMLDivElement>(null);
   const [openPopup, setOpenPopUp] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref);
-
-  // Logo animation variants
-  const logoVariants = {
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-        damping: 12,
-        duration: 0.6,
-      },
-    },
-    hidden: { 
-      opacity: 0, 
-      scale: 0.8, 
-      y: 50 
-    },
-  };
 
   const handleNewsLetterData = (e: FormEvent) => {
     e.preventDefault();
-    console.log(e);
     const target = e.target as HTMLFormElement;
     const formData = new FormData(target);
-
     const clientEmail = formData.get('newsletter_email')!;
     
     setOpenPopUp(true);
     target.reset();
-    if (setOpenPopUp) {
-      setTimeout(() => {
-        setOpenPopUp(false);
-      }, 2000);
-    }
+    setTimeout(() => {
+      setOpenPopUp(false);
+    }, 2000);
   };
 
   return (
-    <>
-      <div
-        className='relative h-full sm:pt-14 pt-8 bg-[#f7f7f7] text-black'
-        ref={container}
-      >
-        <div className='sm:container px-4 mx-auto'>
-          <div className='md:flex justify-between w-full'>
-            <div>
-              <h1 className='md:text-4xl text-2xl font-semibold'>
-                Let&lsquo;s build something amazing together
-              </h1>
-              <div className='pt-2 pb-6 md:w-99 '>
-                <p className='md:text-2xl text-xl py-4'>
-                  Get project updates & construction insights*
-                </p>
-                <div className=' hover-button relative bg-black flex justify-between items-center border-2 overflow-hidden border-black rounded-full text-white hover:text-black md:text-2xl'>
-                  <form
-                    onSubmit={(e) => handleNewsLetterData(e)}
-                    className='relative z-2 grid grid-cols-6 w-full h-full'
-                  >
-                    <input
-                      type='email'
-                      name='newsletter_email'
-                      className='border-none bg-transparent py-3 px-6 col-span-5'
-                      placeholder='Your Email * '
-                      required
-                    />
-                    <button
-                      type='submit'
-                      className='cursor-pointer w-full hover:bg-accent bg-white text-white h-full cols-span-1 transition-colors duration-300'
-                    >
-                      <svg
-                        width='15'
-                        height='15'
-                        viewBox='0 0 15 15'
-                        fill='none'
-                        className='w-full h-[80%] '
-                        xmlns='http://www.w3.org/2000/svg'
-                      >
-                        <path
-                          d='M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z'
-                          fill='#000'
-                          fillRule='evenodd'
-                          clipRule='evenodd'
-                        />
-                      </svg>
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div className='flex gap-10'>
-              <ul>
-                <li className='text-2xl pb-2 text-black font-semibold'>
-                  SITEMAP
-                </li>
-                <li className='text-xl font-medium'>
-                  <Link href='/'>Home</Link>
-                </li>
-                <li className='text-xl font-medium'>
-                  <Link href='/about'>About us</Link>
-                </li>
-                <li className='text-xl font-medium'>
-                  <Link href='/services'>Our Services</Link>
-                </li>
-                <li className='text-xl font-medium'>
-                  <Link href='/projects'>Projects</Link>
-                </li>
-                <li className='text-xl font-medium'>
-                  <Link href='/blogs'>Blogs</Link>
-                </li>
-                <li className='text-xl font-medium'>
-                  <Link href='/contact-us'>Contact</Link>
-                </li>
-              </ul>
-              <ul>
-                <li className='text-2xl pb-2 text-black font-semibold'>
-                  SOCIAL
-                </li>
-                <li className='text-xl font-medium'>
-                  <a
-                    href='https://www.linkedin.com/company/karekadu-builders/'
-                    target='_blank'
-                    className='underline hover:text-accent transition-colors'
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li className='text-xl font-medium'>
-                  <a
-                    href='https://twitter.com/KarekaduBuilders'
-                    target='_blank'
-                    className='underline hover:text-accent transition-colors'
-                  >
-                    Twitter
-                  </a>
-                </li>
-                <li className='text-xl font-medium'>
-                  <a
-                    href='https://www.instagram.com/karekadubuilders/'
-                    target='_blank'
-                    className='underline hover:text-accent transition-colors'
-                  >
-                    Instagram
-                  </a>
-                </li>
-                <li className='text-xl font-medium'>
-                  <a
-                    href='https://www.facebook.com/karekadubuilders'
-                    target='_blank'
-                    className='underline hover:text-accent transition-colors'
-                  >
-                    Facebook
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Replace the animated SVG with your PNG logo */}
-          <div className='border-y-2 md:py-8 py-6 border-gray-200 flex justify-center items-center'>
-            <motion.div
-              ref={ref}
-              initial='hidden'
-              animate={isInView ? 'visible' : 'hidden'}
-              variants={logoVariants}
-              className='relative'
-            >
-              {/* Replace with your PNG logo */}
+    <footer className='bg-[#1a1a1a] text-white'>
+      <div className='container mx-auto px-6 py-16'>
+        {/* Main Footer Content */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16'>
+          
+          {/* Left Section - Logo & Brand */}
+          <div className='lg:col-span-1'>
+            <div className='mb-8'>
               <Image
-                src="/logo.png" // Put your logo in public folder
-                alt="KAREKADU BUILDERS & ARCHITECTS - Premium Construction & Architecture"
-                width={400}
-                height={120}
-                className='h-16 md:h-24 w-auto object-contain filter hover:brightness-110 transition-all duration-300'
-                priority
+                src="/llogo.png"
+                alt="Karekadu Builders & Architects"
+                width={200}
+                height={67}
+                className='h-16 md:h-20 w-auto object-contain brightness-0 invert'
               />
-              
-              {/* Optional: Add a subtle glow effect */}
-              <div className='absolute inset-0 bg-gradient-to-r from-orange-400/20 to-blue-600/20 blur-xl -z-10 opacity-0 hover:opacity-100 transition-opacity duration-500' />
-            </motion.div>
+            </div>
+            <h3 className='text-xl font-semibold mb-3'>
+              Karekadu Builders & Architects
+            </h3>
+            <p className='text-gray-400 text-sm leading-relaxed'>
+              Building excellence through innovation, craftsmanship, and dedication to quality construction.
+            </p>
           </div>
 
-          <div className='flex md:flex-row flex-col-reverse gap-3 justify-between py-2'>
-            <span className='font-medium'>
-              &copy; 2024 KAREKADU BUILDERS & ARCHITECTS. All Rights Reserved.
-            </span>
-            <div className='flex gap-4'>
-              <a href='#' className='font-semibold hover:text-accent transition-colors'>
+          {/* Sitemap Section */}
+          <nav className='lg:col-span-1'>
+            <h4 className='text-sm font-bold uppercase tracking-wider mb-6 text-accent'>
+              Sitemap
+            </h4>
+            <ul className='space-y-3'>
+              <li>
+                <Link 
+                  href='/' 
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm'
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href='/about' 
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm'
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href='/services' 
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm'
+                >
+                  Our Services
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href='/portfolio' 
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm'
+                >
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href='/blogs' 
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm'
+                >
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href='/contact' 
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm'
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Social Section */}
+          <nav className='lg:col-span-1'>
+            <h4 className='text-sm font-bold uppercase tracking-wider mb-6 text-accent'>
+              Social
+            </h4>
+            <ul className='space-y-3'>
+              <li>
+                <a
+                  href='https://www.linkedin.com/company/karekadu-builders/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2'
+                >
+                  <Linkedin className='w-4 h-4' />
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href='https://twitter.com/KarekaduBuilders'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2'
+                >
+                  <Twitter className='w-4 h-4' />
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a
+                  href='https://www.instagram.com/karekadubuilders/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2'
+                >
+                  <Instagram className='w-4 h-4' />
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href='https://www.facebook.com/karekadubuilders'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-gray-300 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2'
+                >
+                  <Facebook className='w-4 h-4' />
+                  Facebook
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Newsletter / CTA Section */}
+          <div className='lg:col-span-1'>
+            <h4 className='text-sm font-bold uppercase tracking-wider mb-6 text-accent'>
+              Newsletter
+            </h4>
+            <h3 className='text-lg font-semibold mb-3 leading-tight'>
+              Let&rsquo;s build something amazing together
+            </h3>
+            <p className='text-gray-400 text-sm mb-4'>
+              Get project updates & construction insights
+            </p>
+            <form onSubmit={handleNewsLetterData} className='relative'>
+              <div className='flex items-center bg-white/10 rounded-md overflow-hidden border border-white/20 focus-within:border-accent transition-colors duration-300'>
+                <input
+                  type='email'
+                  name='newsletter_email'
+                  placeholder='Your email'
+                  required
+                  className='flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:outline-none'
+                />
+                <button
+                  type='submit'
+                  className='px-4 py-3 bg-accent hover:bg-accent/90 transition-colors duration-300 flex items-center justify-center'
+                  aria-label='Subscribe to newsletter'
+                >
+                  <ArrowRight className='w-5 h-5 text-white' />
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className='border-t border-white/10 pt-8'>
+          <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
+            
+            {/* Social Icons */}
+            <div className='flex items-center gap-4'>
+              <a
+                href='https://www.linkedin.com/company/karekadu-builders/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='w-9 h-9 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-colors duration-300'
+                aria-label='LinkedIn'
+              >
+                <Linkedin className='w-4 h-4' />
+              </a>
+              <a
+                href='https://twitter.com/KarekaduBuilders'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='w-9 h-9 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-colors duration-300'
+                aria-label='Twitter'
+              >
+                <Twitter className='w-4 h-4' />
+              </a>
+              <a
+                href='https://www.instagram.com/karekadubuilders/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='w-9 h-9 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-colors duration-300'
+                aria-label='Instagram'
+              >
+                <Instagram className='w-4 h-4' />
+              </a>
+              <a
+                href='https://www.facebook.com/karekadubuilders'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='w-9 h-9 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-colors duration-300'
+                aria-label='Facebook'
+              >
+                <Facebook className='w-4 h-4' />
+              </a>
+            </div>
+
+            {/* Copyright */}
+            <div className='text-center'>
+              <p className='text-gray-400 text-sm'>
+                &copy; 2024 Karekadu Builders & Architects. All rights reserved.
+              </p>
+            </div>
+
+            {/* Legal Links */}
+            <div className='flex items-center gap-6'>
+              <Link 
+                href='/privacy-policy' 
+                className='text-gray-400 hover:text-white text-sm transition-colors duration-300'
+              >
                 Privacy Policy
-              </a>
-              <a href='#' className='font-semibold hover:text-accent transition-colors'>
+              </Link>
+              <Link 
+                href='/terms-of-service' 
+                className='text-gray-400 hover:text-white text-sm transition-colors duration-300'
+              >
                 Terms of Service
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    </>
+
+      {/* Newsletter Popup */}
+      {openPopup && (
+        <div className='fixed bottom-4 right-4 bg-accent text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-slide-up'>
+          <p className='font-medium'>Thank you for subscribing!</p>
+        </div>
+      )}
+    </footer>
   );
 };
 

@@ -324,7 +324,7 @@ function OrganizationHero() {
                         autoPlay
                         poster="/thumbnail.png"
                       >
-                        <source src="/construction-timelapse.mp4" type="video/mp4" />
+                        <source src="/kk.mp4" type="video/mp4" />
                       </video>
                       
                       {/* Play Button Overlay */}
@@ -405,7 +405,7 @@ function OrganizationHero() {
                 autoPlay
                 playsInline
               >
-                <source src="/about.mp4" type="video/mp4" />
+                <source src="/kk.mp4" type="video/mp4" />
               </video>
 
               <button
